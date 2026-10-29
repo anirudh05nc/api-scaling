@@ -10,6 +10,9 @@ from sqlalchemy.orm import Session
 
 from app.database import Item, check_db_connection, get_db, init_db
 
+import socket
+
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("api-scaling")
@@ -68,6 +71,7 @@ def read_root():
     return {
         "message": "Welcome to the Scalable API Service",
         "status": "online",
+        "instance": socket.gethostname(),
         "docs_url": "/docs",
         "health_check": "/health",
         "items_endpoint": "/items",
